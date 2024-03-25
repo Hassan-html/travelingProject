@@ -9,6 +9,7 @@ import {
   FaPersonCane,
   FaPlaneDeparture,
 } from "react-icons/fa6";
+import Featured from "./components/Featured/Featured";
 
 export default function Home() {
   return (
@@ -126,15 +127,8 @@ export default function Home() {
           </p>
         </motion.article>
       </section>
-      <section className="packages">
-        <h1 className="title">Featured Destinations</h1>
-        <div className="gallery grid grid-cols-4 grid-rows-4">
-          <div className="article col-span-2 row-span-2 bg-primary rounded-sm"></div>
-          <div className="article bg-secondary rounded-sm"></div>
-          <div className="article bg-primary rounded-sm"></div>
-        </div>
-      </section>
-      <h1>Hello</h1>
+
+      <Featured />
     </>
   );
 }
