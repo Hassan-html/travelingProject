@@ -134,6 +134,7 @@ export default function Home() {
           <div className="article bg-primary rounded-sm"></div>
         </div>
       </section>
+      <h1>Hello</h1>
     </>
   );
 }
