@@ -10,8 +10,22 @@ import {
   FaPlaneDeparture,
 } from "react-icons/fa6";
 import Featured from "./components/Featured/Featured";
+import Services from "./components/services/Services";
 
 export default function Home() {
+  const forFeature1 = [
+    { img: "/others/hero4.jpg" },
+    { img: "/others/hero1.jpg" },
+    { img: "/others/hero2.jpg" },
+    { img: "/others/hero3.jpg" },
+  ];
+  const forFeature2 = [
+    { img: "/people/people1.jpg" },
+    { img: "/people/people2.jpg" },
+    { img: "/people/people3.jpg" },
+    { img: "/people/people4.jpg" },
+  ];
+
   return (
     <>
       {/* Hero section */}
@@ -128,7 +142,27 @@ export default function Home() {
         </motion.article>
       </section>
 
-      <Featured />
+      <Services />
+      <Featured
+        flip={false}
+        images={[...forFeature1]}
+        articleText={{
+          title: "Explore Tour destinations with us.",
+          subtitle: "Travelers Space",
+          descp: `Whether you're dreaming of sipping cocktails on a tropical beach,
+            trekking through lush forests, or wandering the streets of bustling
+            cities`,
+        }}
+      />
+      <Featured
+        flip={true}
+        images={[...forFeature2]}
+        articleText={{
+          title: "Why Choose Us ?",
+          subtitle: "Your trusted guide to get you to your destination",
+          descp: ` Skyways is here to turn your dreams into reality. So pack your bags, grab your passport, and let's embark on an adventure of a lifetime together!`,
+        }}
+      />
     </>
   );
 }

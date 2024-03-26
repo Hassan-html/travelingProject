@@ -71,7 +71,7 @@ export default function Header() {
 
         <ul className="links h-full flex flex-col lg:flex-row gap-4 lg:items-center text-[17px] text-secondary mt-3 lg:mt-0">
           <li>
-            <Link href="/pages/Home">Home</Link>
+            <Link href="/">Home</Link>
           </li>
           <li>
             <Link href="/pages/Packages">Packages</Link>

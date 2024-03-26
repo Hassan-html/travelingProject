@@ -44,7 +44,7 @@ export default function Footer() {
           <h1 className="title ">Quick Links</h1>
           <ul>
             <li>
-              <Link href="/pages/Home">Home</Link>
+              <Link href="/">Home</Link>
             </li>
             <li>
               <Link href="/pages/Packages">Packages</Link>
