@@ -34,7 +34,7 @@ const Gallery = () => {
     <>
       <section
         className="gallery flex flex-col lg:grid lg:grid-cols-4 lg:grid-rows-2 
-         lg:w-full justify-center items-center gap-5 lg:p-4 min-h-[80vh]"
+         lg:w-full justify-center items-center gap-5 lg:p-4 min-h-[80vh] overflow-hidden"
       >
         {DataArray.map((item, index) => {
           const { img, name, sDescp } = item;
