@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa6";
 import Featured from "./components/Featured/Featured";
 import Services from "./components/services/Services";
+import TicketBar from "./components/TicketsSearch/TicketBar";
 
 export default function Home() {
   const forFeature1 = [
@@ -70,10 +71,12 @@ export default function Home() {
           </motion.p>
         </article>
         {/* ticket section */}
-        <section className="absolute z-20 bottom-0 w-[80%] min-h-[100px] rounded-[15px] shadow-md shadow-Dark bg-white translate-y-[40px]"></section>
+
+        <TicketBar />
+
+        {/* Home cards after hero */}
       </section>
-      {/* Home cards after hero */}
-      <section className="homeSec1 min-h-[200px] mt-20 px-10 gap-[40px] grid lg:grid-cols-4 items-center justify-items-center my-[20px] ">
+      <section className="homeSec1 min-h-[200px]  px-10 gap-[40px] grid lg:grid-cols-4 items-center justify-items-center my-[20px] mt-[350px] md:mt-[150px]">
         <motion.article
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
