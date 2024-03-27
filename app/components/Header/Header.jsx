@@ -42,7 +42,7 @@ export default function Header() {
       {/* main nav*/}
 
       <motion.nav
-        className={`w-full main grid grid-cols-1  lg:grid-cols-[12%,68%,20%]  items-center text-secondary px-4 py-2 z-[1000] ${
+        className={`w-full main grid grid-cols-1  lg:grid-cols-[12%,68%,20%]  items-center text-secondary px-4 py-2 z-[1000] shadow-lg ${
           !nav ? "h-[60px]" : "h-[330px]"
         } overflow-hidden border-b-2 lg:border-none ${
           scroll > 60 ? "fixed bg-white top-0" : "relative"
@@ -87,11 +87,11 @@ export default function Header() {
         <section className="buttons grid grid-rows-2 lg:flex items-center lg:justify-end   gap-2">
           <Link
             className="w-full lg:w-fit flex items-center justify-center"
-            href="pages/auth/Login"
+            href="/pages/auth/login"
           >
             Login
           </Link>
-          <Link href="pages/auth/Register">
+          <Link href="/pages/auth/register">
             <Button className="w-full bg-primary hover:bg-secondary">
               Register
             </Button>

@@ -26,7 +26,7 @@ function Featured(prop) {
         <section
           className={`scrolled-section absolute w-[90%] lg:w-[90%] h-[450px] lg:grid gap-[100px] ${
             flip ? "justify-end" : "justify-start"
-          } overflow-y-auto snap-y snap-mandatory pb-10 justify-self-center self-start lg:self-start  lg:mt-0 order-1`}
+          } overflow-y-auto overflow-x-hidden snap-y snap-mandatory pb-10 justify-self-center self-start lg:self-start  lg:mt-0 order-1`}
         >
           {images.map((item, index) => {
             const { img } = item;
