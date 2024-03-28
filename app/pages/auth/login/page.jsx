@@ -2,16 +2,26 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [err, setErr] = useState();
+  const [success, setSuccess] = useState("");
+
+  const navigate = useRouter();
+
   const formHandler = async (e) => {
     e.preventDefault();
+
     axios
       .post("/api/controllers/login", JSON.stringify({ email, password }))
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res);
+        navigate.push("/pages/profile/helo");
+      })
+      .catch((err) => setErr(err.response.data.message));
   };
   return (
     <>
@@ -47,16 +57,16 @@ export default function Login() {
             <button className="bg-primary text-white w-full rounded-md">
               Login
             </button>
-            {/* <span
+            <span
               className={
                 err
-                  ? ` w-80 text-center bg-red text-white`
-                  : " w-80 text-center bg-green text-white"
+                  ? ` w-80 text-center bg-red text-red-600`
+                  : " w-80 text-center bg-green text-green-800"
               }
             >
               {err && err}
               {success && success}{" "}
-            </span> */}
+            </span>
             <div className="txt">
               or if you Dont have an account{" "}
               <Link

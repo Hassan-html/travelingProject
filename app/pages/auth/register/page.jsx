@@ -19,6 +19,7 @@ export default function Register() {
 
   const formHandler = (e) => {
     e.preventDefault();
+    setUserCreated(false);
     console.log(body);
 
     axios
@@ -28,11 +29,13 @@ export default function Register() {
         setErr("");
         setSuccess("User Registered");
         router.push("/pages/auth/login");
+        setUserCreated(true);
       })
       .catch((err) => {
         const error = err.response.data.message;
         toast.error(error);
         setErr(error);
+        setUserCreated(true);
         setSuccess("");
       });
   };

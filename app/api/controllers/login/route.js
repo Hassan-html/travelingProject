@@ -45,8 +45,6 @@ export async function POST(req) {
       return response;
     }
   } else {
-    console.log("not exist: " + user);
+    return NextResponse.json({ message: "Invalid Email" }, { status: 505 });
   }
-
-  return NextResponse.json({ message: "arrived" }, { status: 200 });
 }
