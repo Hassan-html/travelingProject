@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 export default function Register() {
   const router = useRouter();
   const [body, setBody] = useState({
@@ -15,29 +16,24 @@ export default function Register() {
   const [success, setSuccess] = useState("");
   const [err, setErr] = useState("");
   const [userCreated, setUserCreated] = useState(true);
-  const formHandler = async (e) => {
-    e.preventDefault();
-    setUserCreated(false);
 
-    setUserCreated(false);
+  const formHandler = (e) => {
+    e.preventDefault();
+    console.log(body);
+
     axios
-      .post("/api/register", body)
+      .post("/api/controllers/register", JSON.stringify(body))
       .then((res) => {
         console.log(res);
-        setUserCreated(true);
         setErr("");
-        setSuccess(res.data.message);
+        setSuccess("User Registered");
         router.push("/pages/auth/login");
       })
       .catch((err) => {
-        console.log(err);
-        if (err.response.data.error.code === 11000) {
-          setErr("User Exist");
-        } else {
-          setErr(err.response.data.error.messages[0].message);
-        }
-        // setErr(err.response.data.message);
-        setUserCreated(true);
+        const error = err.response.data.message;
+        toast.error(error);
+        setErr(error);
+        setSuccess("");
       });
   };
   useEffect(() => {
@@ -121,12 +117,12 @@ export default function Register() {
           <span
             className={
               err
-                ? ` w-80 text-center bg-red text-white`
-                : " w-80 text-center bg-green text-white"
+                ? ` w-80 text-center bg-red text-red-600`
+                : " w-80 text-center bg-green  text-green-400"
             }
           >
             {err && err}
-            {success && success}{" "}
+            {success && success}
           </span>
           <div className="txt">
             or if you already have account{" "}

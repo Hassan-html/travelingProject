@@ -1,14 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+import axios from "axios";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const formHandler = async (e) => {
     e.preventDefault();
-    signIn("credentials", { email, password });
-    console.log("Register");
+    axios
+      .post("/api/controllers/login", JSON.stringify({ email, password }))
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
   return (
     <>
