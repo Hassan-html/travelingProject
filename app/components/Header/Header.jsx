@@ -68,7 +68,9 @@ export default function Header() {
             />
           </div>
         </section>
+
         {/* nav links */}
+
         <ul className="links h-full flex flex-col lg:flex-row gap-4 lg:items-center text-[17px] text-secondary mt-3 lg:mt-0">
           <li>
             <Link href="/">Home</Link>
@@ -83,9 +85,9 @@ export default function Header() {
             <Link href="/pages/Contact">Contact</Link>
           </li>
         </ul>
+
         {/* register button */}
-        Checking
-        {/* {!info.logedStatus ? (
+        {!info.logedStatus ? (
           <section className="buttons grid grid-rows-2 lg:flex items-center lg:justify-end   gap-2">
             <Link
               className="w-full lg:w-fit flex items-center justify-center"
@@ -97,11 +99,12 @@ export default function Header() {
               <Button className="w-full bg-primary hover:bg-secondary">
                 Register
               </Button>
-            </Link>
+            </Link>{" "}
+            {`${info.logedStatus}`}
           </section>
         ) : (
           "user"
-        )} */}
+        )}
       </motion.nav>
       {/* back to top button */}
       <motion.button
