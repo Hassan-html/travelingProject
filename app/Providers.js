@@ -22,10 +22,10 @@ export const LogedProvider = ({ children }) => {
         setUser(false);
         console.log(err);
       });
-  });
+  }, []);
   return (
     <logedInContext.Provider value={user}>
-      {!user ? `<h1>Loading</h1>` : children}
+      {!user ? <h1>Loading</h1> : children}
     </logedInContext.Provider>
   );
 };

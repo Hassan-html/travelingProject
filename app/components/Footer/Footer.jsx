@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="text-white">Travel your way around the world</div>
       </section>
       <footer className="bg-primary bg-opacity-20 flex flex-wrap px-[40px] py-[100px] justify-around">
-        <aritcle className="w-full flex flex-col justify-center items-center gap-[10px] pb-[20px]">
+        <article className="w-full flex flex-col justify-center items-center gap-[10px] pb-[20px]">
           <h1 className="title">Our Brief History</h1>
           <p className="text-center">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas
@@ -18,7 +18,7 @@ export default function Footer() {
             aspernatur dolor quibusdam? Quisquam quod perferendis repellendus
             vitae mollitia eveniet voluptate.
           </p>
-        </aritcle>
+        </article>
         <section className="footer-section">
           <h1 className="title ">Want to get in touch?</h1>
           <article className="box">

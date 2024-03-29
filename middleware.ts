@@ -16,11 +16,5 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: [
-    "/",
-    "/pages/profile/:path*",
-    "/pages/profile",
-    "/pages/auth/register",
-    "/pages/auth/login",
-  ],
+  matcher: ["/"],
 };
