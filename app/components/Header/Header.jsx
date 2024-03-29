@@ -4,6 +4,7 @@ import "./Header.css";
 import Link from "next/link";
 import { Button } from "flowbite-react";
 import { motion } from "framer-motion";
+import { useLogedProvider } from "../../Providers";
 import {
   FaArrowUpLong,
   FaBars,
@@ -15,6 +16,7 @@ import {
 export default function Header() {
   const [scroll, setScroll] = useState();
   const [nav, setNav] = useState(false);
+  const info = useLogedProvider();
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScroll(scrollY);
@@ -83,20 +85,25 @@ export default function Header() {
             <Link href="/pages/Contact">Contact</Link>
           </li>
         </ul>
+
         {/* register button */}
-        <section className="buttons grid grid-rows-2 lg:flex items-center lg:justify-end   gap-2">
-          <Link
-            className="w-full lg:w-fit flex items-center justify-center"
-            href="/pages/auth/login"
-          >
-            Login
-          </Link>
-          <Link href="/pages/auth/register">
-            <Button className="w-full bg-primary hover:bg-secondary">
-              Register
-            </Button>
-          </Link>
-        </section>
+        {!info.logedStatus ? (
+          <section className="buttons grid grid-rows-2 lg:flex items-center lg:justify-end   gap-2">
+            <Link
+              className="w-full lg:w-fit flex items-center justify-center"
+              href="/pages/auth/login"
+            >
+              Login
+            </Link>
+            <Link href="/pages/auth/register">
+              <Button className="w-full bg-primary hover:bg-secondary">
+                Register
+              </Button>
+            </Link>
+          </section>
+        ) : (
+          "user"
+        )}
       </motion.nav>
       {/* back to top button */}
       <motion.button
