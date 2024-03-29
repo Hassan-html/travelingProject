@@ -3,8 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { connect } from "../../dbconfig/mongoseConfig";
 connect();
 export async function GET(request: NextRequest) {
+  const token = request.cookies.get("token")?.value || "";
   try {
-    const userId = (await extractingData(request)) || "";
+    const userId = (await extractingData(request, token)) || "";
     if (userId) {
       return NextResponse.json(
         { message: userId, logedIn: true },
