@@ -21,6 +21,7 @@ export default function Header() {
     window.addEventListener("scroll", () => {
       setScroll(scrollY);
     });
+    console.log(info);
   });
 
   return (
@@ -100,7 +101,7 @@ export default function Header() {
                 Register
               </Button>
             </Link>{" "}
-            {`${info.logedStatus}`}
+            {`${info}`}
           </section>
         ) : (
           "user"
