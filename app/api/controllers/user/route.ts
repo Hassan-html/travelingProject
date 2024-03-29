@@ -17,6 +17,9 @@ export async function GET(request: NextRequest) {
       );
     }
   } catch (error: any) {
-    return NextResponse.json({ message: false }, { status: 200 });
+    return NextResponse.json(
+      { message: false, logedIn: error },
+      { status: 200 }
+    );
   }
 }
