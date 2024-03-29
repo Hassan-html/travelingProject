@@ -7,6 +7,6 @@ export const extractingData = (request: NextRequest) => {
     const decodedData: any = jwt.verify(token, process.env.TOKEN_SECRET!);
     return decodedData.id;
   } catch (error) {
-    throw new Error(error.message);
+    return error;
   }
 };
