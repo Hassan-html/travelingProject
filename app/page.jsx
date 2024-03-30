@@ -175,8 +175,8 @@ export default function Home() {
 
       <Services />
 
-      <section className="trial">
-        <div className="my=[500px] grid grid-cols-2 h-screen">
+      <section className="trial p-4">
+        <div className="my-[500px] grid grid-cols-2 h-screen">
           <div className="part-2 text-[1.3rem]">
             <TimeProgressComponent timeContent={Time2} />
           </div>
