@@ -6,6 +6,7 @@ import { FaHatCowboy, FaHotel, FaMap, FaPlaneDeparture } from "react-icons/fa6";
 import Featured from "./components/Featured/Featured";
 import Services from "./components/services/Services";
 import TicketBar from "./components/TicketsSearch/TicketBar";
+import TimeProgressComponent from "./components/TimeLine/Timeline";
 
 export default function Home() {
   const forFeature1 = [
@@ -19,6 +20,39 @@ export default function Home() {
     { img: "/people/people2.jpg" },
     { img: "/people/people3.jpg" },
     { img: "/people/people4.jpg" },
+  ];
+  const Time2 = [
+    {
+      head: "Destination Insights",
+      title: "Destination Expertise",
+      descp:
+        "Our team is well-versed in the destinations we offer, providing you with in-depth knowledge and insider tips to make the most of your trip.",
+    },
+    {
+      head: "Value Proposition",
+      title: "Value for Money",
+      descp:
+        "We understand the importance of value for money when it comes to travel. That's why we work tirelessly to negotiate the best deals and discounts for our customers, ensuring that you get the most bang for your buck.",
+    },
+    {
+      head: "Convenience and Flexibility",
+      title: "Flexible Booking Options",
+      descp:
+        "We prioritize convenience and flexibility to make your travel experience as smooth and stress-free as possible. With easy booking processes, flexible payment options, and hassle-free cancellations, we're here to accommodate your needs and preferences every step of the way.",
+      clickLink: { text: "Contact Now", src: "/pages/Contact" },
+    },
+    {
+      head: "Safety and Security",
+      title: "Your Safety Matters",
+      descp:
+        "Your safety and security are our top priorities. We adhere to the highest safety standards and work with trusted partners to ensure that your journey is safe and secure.",
+    },
+    {
+      head: "Community Engagement",
+      title: "Connecting Communities",
+      descp:
+        "We are committed to giving back to the communities we visit and supporting sustainable tourism practices. Through partnerships with local organizations and initiatives, we strive to make a positive impact on the destinations we explore..",
+    },
   ];
 
   return (
@@ -140,6 +174,22 @@ export default function Home() {
       </section>
 
       <Services />
+
+      <section className="trial">
+        <div className="my=[200px] grid grid-cols-2 h-screen">
+          <div className="part-2 text-[1.3rem]">
+            <TimeProgressComponent timeContent={Time2} />
+          </div>
+          <div className="part-1 sticky top-0 flex flex-col  justify-center items-center text-center h-[200px] ">
+            <h1 className="text-primary text-[13px] md:text-[3rem]">
+              Quality and Reliability
+            </h1>
+            <p className="text-special text-[12px] md:text-base">
+              Quality and reliability are at the core of everything we do
+            </p>
+          </div>
+        </div>
+      </section>
       <Featured
         flip={false}
         images={[...forFeature1]}
