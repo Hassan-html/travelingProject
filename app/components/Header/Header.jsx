@@ -1,27 +1,43 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import "./Header.css";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "flowbite-react";
 import { motion } from "framer-motion";
 import { useLogedProvider } from "../../Providers";
+import UserButton from "../avatar/avatar";
+import axios from "axios";
+import ComponentSpinner from "../spinnerPage/componentSpinner";
+
 import {
   FaArrowUpLong,
   FaBars,
   FaFacebook,
   FaInstagram,
-  FaPlane,
   FaTwitter,
 } from "react-icons/fa6";
 export default function Header() {
   const [scroll, setScroll] = useState();
   const [nav, setNav] = useState(false);
+  const [Loged, setLoged] = useState("wait");
+  const [user, setUser] = useState();
+
   const info = useLogedProvider();
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScroll(scrollY);
     });
-    console.log(info);
+    axios
+      .get("/api/controllers/logeState")
+      .then((res) => {
+        setUser({ userId: res.data.message, logedStatus: res.data.logedIn });
+        setLoged(res.data.logedIn);
+      })
+      .catch((err) => {
+        setUser({ userId: err, logedStatus: false });
+        console.log(err);
+      });
   });
 
   return (
@@ -43,70 +59,80 @@ export default function Header() {
         </div>
       </nav>
       {/* main nav*/}
+      {Loged === "wait" ? (
+        <ComponentSpinner />
+      ) : (
+        <motion.nav
+          className={`w-full main grid grid-cols-1  lg:grid-cols-[12%,68%,20%]  items-center text-secondary px-4 py-2 z-[1000] shadow-lg lg:h-[80px] ${
+            !nav ? "h-[60px] " : "h-[330px]"
+          } overflow-hidden border-b-2 lg:border-none ${
+            scroll > 60 ? "fixed bg-white top-0" : "relative"
+          }`}
+          layout
+        >
+          {/* title */}
+          <section className="logo text-[20px] flex justify-between">
+            <div className="itm flex  items-center gap-2">
+              <Image
+                className="relative"
+                src="/logo.svg"
+                width="35"
+                height="35"
+              />
+              Travel Wavez
+            </div>
 
-      <motion.nav
-        className={`w-full main grid grid-cols-1  lg:grid-cols-[12%,68%,20%]  items-center text-secondary px-4 py-2 z-[1000] shadow-lg ${
-          !nav ? "h-[60px]" : "h-[330px]"
-        } overflow-hidden border-b-2 lg:border-none ${
-          scroll > 60 ? "fixed bg-white top-0" : "relative"
-        }`}
-        layout
-      >
-        {/* title */}
-        <section className="logo text-[30px] flex justify-between">
-          <div className="itm flex  items-center gap-2">
-            <FaPlane className=" rotate-[300deg] text-primary" />
-            Travel
-          </div>
-
-          {/* togel button */}
-          <div className="toggle-button flex justify-end items-center lg:hidden">
-            <FaBars
-              className="text-[30px] text-secondary cursor-pointer"
-              onClick={() => {
-                setNav(!nav);
-              }}
-            />
-          </div>
-        </section>
-
-        {/* nav links */}
-
-        <ul className="links h-full flex flex-col lg:flex-row gap-4 lg:items-center text-[17px] text-secondary mt-3 lg:mt-0">
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/pages/Packages">Packages</Link>
-          </li>
-          <li>
-            <Link href="/pages/About">About</Link>
-          </li>
-          <li>
-            <Link href="/pages/Contact">Contact</Link>
-          </li>
-        </ul>
-
-        {/* register button */}
-        {!info.logedStatus ? (
-          <section className="buttons grid grid-rows-2 lg:flex items-center lg:justify-end   gap-2">
-            <Link
-              className="w-full lg:w-fit flex items-center justify-center"
-              href="/pages/auth/login"
-            >
-              Login
-            </Link>
-            <Link href="/pages/auth/register">
-              <Button className="w-full bg-primary hover:bg-secondary">
-                Register
-              </Button>
-            </Link>{" "}
-            {`${info}`}
+            {/* togel button */}
+            <div className="toggle-button flex justify-end items-center lg:hidden">
+              <FaBars
+                className="text-[30px] text-secondary cursor-pointer"
+                onClick={() => {
+                  setNav(!nav);
+                }}
+              />
+            </div>
           </section>
-        ) : (
-          "user"
-        )}
-      </motion.nav>
+
+          {/* nav links */}
+
+          <ul className="links h-full flex flex-col lg:flex-row gap-4 lg:items-center text-[17px] text-secondary mt-3 lg:mt-0">
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/pages/Packages">Packages</Link>
+            </li>
+            <li>
+              <Link href="/pages/About">About</Link>
+            </li>
+            <li>
+              <Link href="/pages/Contact">Contact</Link>
+            </li>
+          </ul>
+
+          {/* register button */}
+          {!Loged ? (
+            <section className="buttons grid grid-rows-2 lg:flex items-center lg:justify-end   gap-2">
+              <Link
+                className="w-full lg:w-fit flex items-center justify-center"
+                href="/pages/auth/login"
+              >
+                Login
+              </Link>
+              <Link href="/pages/auth/register">
+                <Button className="w-full bg-primary hover:bg-secondary">
+                  Register
+                </Button>
+              </Link>
+            </section>
+          ) : (
+            <div className="wraper flex justify-end items-center pr-4">
+              <UserButton />
+            </div>
+          )}
+        </motion.nav>
+      )}
+
       {/* back to top button */}
       <motion.button
         onClick={() => {

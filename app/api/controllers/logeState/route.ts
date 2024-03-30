@@ -1,38 +1,22 @@
 import { extractingData } from "../../helpers/extractingToken";
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "../../dbconfig/mongoseConfig";
+import User from "../../models/userModel";
 connect();
 export async function GET(request: NextRequest) {
   const token = request.cookies.get("token")?.value || "";
   try {
     const userId = (await extractingData(request, token)) || "";
-    if (userId !== "NotFound" && userId) {
+    if (userId === "NotFound") {
       return NextResponse.json(
-        { message: userId, logedIn: true },
+        { message: userId, logedIn: false },
         { status: 200 }
       );
     }
     // deleting cookie if someone mess with it
-    else if (userId === "NotFound") {
-      try {
-        const response = NextResponse.json(
-          { message: false, logedIn: false },
-          { status: 200 }
-        );
-        response.cookies.set("token", "", {
-          httpOnly: true,
-          sameSite: true,
-          secure: true,
-          expires: new Date(0),
-        });
-        return response;
-      } catch (error) {
-        console.log(error);
-        return NextResponse.json({ message: error }, { status: 505 });
-      }
-    } else {
+    else {
       return NextResponse.json(
-        { message: "", logedIn: false },
+        { message: userId, logedIn: true },
         { status: 200 }
       );
     }

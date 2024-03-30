@@ -1,6 +1,8 @@
 "use client";
+
 import { useState, useContext, createContext, useEffect } from "react";
 import axios from "axios";
+import SpinnerPage from "./components/spinnerPage/spinner";
 
 const logedInContext = createContext();
 
@@ -9,7 +11,6 @@ export function useLogedProvider() {
 }
 
 export const LogedProvider = ({ children }) => {
-  const [logedIn, setLogedIn] = useState(false);
   const [user, setUser] = useState(false);
 
   useEffect(() => {
@@ -19,13 +20,13 @@ export const LogedProvider = ({ children }) => {
         setUser({ userId: res.data.message, logedStatus: res.data.logedIn });
       })
       .catch((err) => {
-        setUser(false);
+        setUser({ userId: err, logedStatus: false });
         console.log(err);
       });
   }, []);
   return (
     <logedInContext.Provider value={user}>
-      {!user ? <h1>Loading</h1> : children}
+      {!user ? <SpinnerPage /> : children}
     </logedInContext.Provider>
   );
 };

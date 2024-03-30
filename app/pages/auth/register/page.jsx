@@ -4,6 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import ComponentSpinner from "../../../components/spinnerPage/componentSpinner";
 export default function Register() {
   const router = useRouter();
   const [body, setBody] = useState({
@@ -28,6 +29,7 @@ export default function Register() {
         console.log(res);
         setErr("");
         setSuccess("User Registered");
+        toast.success("User Registered");
         router.push("/pages/auth/login");
         setUserCreated(true);
       })
@@ -40,23 +42,21 @@ export default function Register() {
       });
   };
   useEffect(() => {
-    setInterval(() => {
-      setErr("");
-      setSuccess("");
-    }, 5000);
+    if (err || success) {
+      setInterval(() => {
+        setErr("");
+        setSuccess("");
+      }, 5000);
+    }
   }, []);
 
   return (
     <section className="relative mt-20">
-      <div
-        className={
-          !userCreated
-            ? " absolute w-full h-full bg-white bg-opacity-80 mx-auto mt-10 text-2xl w-30  flex items-center justify-center"
-            : "hidden"
-        }
-      >
-        <div className="loader"></div>
-      </div>
+      {!userCreated && (
+        <div className="overlay top-0 left-0 absolute w-full h-full z-[100] ">
+          <ComponentSpinner />
+        </div>
+      )}
 
       <div className="title text-secondary text-center p-4 text-[30px]">
         Register
@@ -117,16 +117,7 @@ export default function Register() {
           <button className="bg-primary text-white w-full rounded-md">
             Register Account
           </button>
-          <span
-            className={
-              err
-                ? ` w-80 text-center bg-red text-red-600`
-                : " w-80 text-center bg-green  text-green-400"
-            }
-          >
-            {err && err}
-            {success && success}
-          </span>
+
           <div className="txt">
             or if you already have account{" "}
             <Link href="/pages/auth/login" className=" underline text-special">

@@ -2,13 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { easeInOut, motion } from "framer-motion";
-import {
-  FaHatCowboy,
-  FaHotel,
-  FaMap,
-  FaPersonCane,
-  FaPlaneDeparture,
-} from "react-icons/fa6";
+import { FaHatCowboy, FaHotel, FaMap, FaPlaneDeparture } from "react-icons/fa6";
 import Featured from "./components/Featured/Featured";
 import Services from "./components/services/Services";
 import TicketBar from "./components/TicketsSearch/TicketBar";
@@ -47,7 +41,7 @@ export default function Home() {
             transition={{ ease: easeInOut, duration: 0.7 }}
             className="spaced-title text-[25px] "
           >
-            Welcome to SkyWay !!
+            Welcome to Travel Wavez !!
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
