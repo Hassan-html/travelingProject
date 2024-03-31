@@ -39,27 +39,29 @@ const ActionButton = (prop) => {
         initial="rest"
         whileHover="hover"
         animate="rest"
-        className="badge cursor-pointer rounded-md relative bg-white grid grid-cols-[30%,80%] px-4 content-center items-center  py-2 w-[200px]  h-[60px] overflow-hidden flex-nowrap"
         transition={{ duration: 2, ease: easeInOut }}
         layout
       >
-        <motion.img
-          src="/logo.svg"
-          width={40}
-          height={40}
-          className=" left-[10px]"
-          variants={h1Action}
-          transition={{ duration: 1, ease: easeInOut }}
-          layout
-        />
-        <motion.h1
-          className="text-Dark w-fit text-nowrap"
-          variants={h1Action}
-          layout
+        <Link
+          href={link}
+          className="text-white badge cursor-pointer rounded-md relative bg-white grid grid-cols-[30%,80%] px-4 content-center items-center  py-2 w-[200px]  h-[60px] overflow-hidden flex-nowrap"
         >
-          {main}
-        </motion.h1>
-        <Link href={link} className="text-white w-full h-full">
+          <motion.img
+            src="/logo.svg"
+            width={40}
+            height={40}
+            className=" left-[10px]"
+            variants={h1Action}
+            transition={{ duration: 1, ease: easeInOut }}
+            layout
+          />
+          <motion.h1
+            className="text-Dark w-fit text-nowrap"
+            variants={h1Action}
+            layout
+          >
+            {main}
+          </motion.h1>
           <motion.p
             className="absolute left-0 bottom-[-60px] w-full h-full bg-Dark text-white flex justify-center items-center text-center"
             variants={pAction}

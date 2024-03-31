@@ -76,7 +76,7 @@ const page = () => {
             subtitle="This can help you to make a better choice"
           />
           <section className="trail">
-            <div className=" my-[200px] grid grid-cols-2 h-screen">
+            <div className=" my-[200px] grid grid-cols-2 min-h-screen">
               <div className="part-1 sticky top-0 flex flex-col  justify-center items-center text-center h-[200px] ">
                 <h1 className="text-primary text-[13px] md:text-[3rem]">
                   Years of Experience
@@ -91,7 +91,7 @@ const page = () => {
                 <TimeProgressComponent timeContent={Time1} />
               </div>
             </div>
-            <div className="my=[200px] grid grid-cols-2 h-screen">
+            <div className="my=[200px] grid grid-cols-2 min-h-screen">
               <div className="part-2 text-[1.3rem]">
                 <TimeProgressComponent timeContent={Time2} />
               </div>
