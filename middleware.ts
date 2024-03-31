@@ -1,11 +1,16 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+  const checkingCookie = request.cookies.get("token") || "";
+  const url = request.nextUrl.pathname;
+  if ((url.includes("/login") || url.includes("/register")) && checkingCookie) {
+    return NextResponse.rewrite(new URL("/", request.url));
+  } else if (url.includes("/profile") && !checkingCookie) {
+    return NextResponse.rewrite(new URL("/", request.url));
+  }
+
   return NextResponse.next();
 }
 
 // See "Matching Paths" below to learn more
-export const config = {
-  matcher: ["/"],
-};

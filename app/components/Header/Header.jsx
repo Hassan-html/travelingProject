@@ -127,7 +127,7 @@ export default function Header() {
             </section>
           ) : (
             <div className="wraper flex justify-end items-center pr-4">
-              <UserButton />
+              {Loged} <UserButton />
             </div>
           )}
         </motion.nav>
