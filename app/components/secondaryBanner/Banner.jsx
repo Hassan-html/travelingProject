@@ -12,11 +12,6 @@ const Banner = (props) => {
       <section className="relative  h-[400px]">
         <Image src="/others/map.jpg" alt="city3" fill objectFit="cover" />
         <div className="overlay bg-Dark bg-opacity-20 absolute w-full h-full justify-center items-center flex flex-col gap-4">
-          <ActionButton
-            main="Travel Wavez"
-            hoverText="Contact"
-            link="/pages/Contact"
-          />
           <BreadCrumbs navi={props.ForCrumb} />
         </div>
       </section>

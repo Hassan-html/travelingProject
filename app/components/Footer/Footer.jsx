@@ -1,7 +1,7 @@
 import React from "react";
 import "./Footer.css";
 import Link from "next/link";
-import { FaFacebook } from "react-icons/fa6";
+import { FaCopyright, FaFacebook } from "react-icons/fa6";
 import ActionButton from "../ActionButton/ActionButton";
 export default function Footer() {
   return (
@@ -26,10 +26,8 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <section className="bottom-title bg-orange-500 p-4 flex items-center justify-center ]">
-          <div className="text-white">Travel your way around the world</div>
-        </section>
-        <footer className="bg-primary bg-opacity-20 flex flex-wrap px-[40px] py-[100px] justify-around">
+        <section className="bottom-title bg-primary p-4 flex items-center justify-center ]"></section>
+        <footer className="bg-Dark bg-opacity-20 flex flex-wrap px-[40px] py-[100px] justify-around">
           <article className="w-full flex flex-col justify-center items-center gap-[10px] pb-[20px]">
             <h1 className="title">Our Brief History</h1>
             <p className="text-center">
@@ -92,6 +90,13 @@ export default function Footer() {
               </li>
             </ul>
           </section>
+        </footer>
+        <footer className="tracking-widest flex text-white bg-Dark p-2">
+          <p className="flex justify-center items-center gap-2 text-sm">
+            {" "}
+            <FaCopyright /> All Rights Reserved {new Date().getFullYear()}{" "}
+            Developer Hsn-Code{" "}
+          </p>
         </footer>
       </footer>
     </>
