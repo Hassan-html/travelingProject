@@ -63,7 +63,7 @@ export default function Header() {
         <ComponentSpinner />
       ) : (
         <motion.nav
-          className={`w-full main grid grid-cols-1  lg:grid-cols-[12%,68%,20%]  items-center text-secondary px-4 py-2 z-[1000] shadow-lg lg:h-[80px] ${
+          className={`w-full main grid grid-cols-1  lg:grid-cols-[16%,1fr,20%]  items-center text-secondary px-4 py-2 z-[1000] shadow-lg lg:h-[80px] ${
             !nav ? "h-[60px] " : "h-[330px]"
           } overflow-hidden border-b-2 lg:border-none ${
             scroll > 60 ? "fixed bg-white top-0" : "relative"
@@ -71,7 +71,7 @@ export default function Header() {
           layout
         >
           {/* title */}
-          <section className="logo text-[20px] flex justify-between">
+          <section className="logo lg:text-[20px] flex justify-between">
             <div className="itm flex  items-center gap-2">
               <Image
                 className="relative"
@@ -97,16 +97,44 @@ export default function Header() {
 
           <ul className="links h-full flex flex-col lg:flex-row gap-4 lg:items-center text-[17px] text-secondary mt-3 lg:mt-0">
             <li>
-              <Link href="/">Home</Link>
+              <Link
+                href="/"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                Home
+              </Link>
             </li>
             <li>
-              <Link href="/pages/Packages">Packages</Link>
+              <Link
+                href="/pages/Packages"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                Packages
+              </Link>
             </li>
             <li>
-              <Link href="/pages/About">About</Link>
+              <Link
+                href="/pages/About"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                About
+              </Link>
             </li>
             <li>
-              <Link href="/pages/Contact">Contact</Link>
+              <Link
+                href="/pages/Contact"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                Contact
+              </Link>
             </li>
           </ul>
 
@@ -116,10 +144,18 @@ export default function Header() {
               <Link
                 className="w-full lg:w-fit flex items-center justify-center"
                 href="/pages/auth/login"
+                onClick={() => {
+                  setNav(false);
+                }}
               >
                 Login
               </Link>
-              <Link href="/pages/auth/register">
+              <Link
+                href="/pages/auth/register"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
                 <Button className="w-full bg-primary hover:bg-secondary">
                   Register
                 </Button>

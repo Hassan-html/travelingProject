@@ -10,28 +10,28 @@ function Featured(prop) {
   return (
     <>
       <section
-        className={`relative grid grid-rows-2 lg:grid-cols-2 justify-items-center items-center h-screen lg:h-[360px] p-10 lg:p-20 mt-[200px] gap-20 lg:gap-[300px] `}
+        className={`relative grid grid-rows-2 lg:grid-cols-2 justify-items-center items-center min-h-screen lg:min-h-[360px] p-10 lg:p-20 mt-[200px] lg:gap-[100px] overflow-hidden`}
       >
         <motion.article
           initial={{ y: 10, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className={
-            flip
-              ? "lg:pl-[20px] grid lg:order-none order-2"
-              : "grid order-2  lg:pl-[100px]"
-          }
+          className={`z-10
+           ${
+             flip
+               ? "lg:pl-[20px] grid lg:order-none order-2"
+               : "grid order-2  justify-self-center"
+           }
+          `}
         >
-          <h1 className="text-secondary text-[30px]">{title}</h1>
-          <h3 className="text-primary text-opacity-80">{subtitle}</h3>
-          <p className="lg:w-[70%] pt-5">{descp}</p>
+          <h1 className="text-secondary lg:text-[30px] text-lg">{title}</h1>
+          <h3 className="text-primary lg:20px text-opacity-80">{subtitle}</h3>
+          <p className="lg:w-[90%] pt-5 text-xs md:text-sm">{descp}</p>
         </motion.article>
 
         <section
-          className={`scrolled-section absolute w-[90%] lg:w-[90%] h-[450px] lg:grid gap-[100px] ${
-            flip ? "justify-end" : "justify-start"
-          } overflow-y-auto overflow-x-hidden snap-y snap-mandatory pb-10 justify-self-center self-start lg:self-center  lg:mt-0 order-1`}
+          className={`w-full h-full ${flip ? "justify-end" : "justify-start"} `}
         >
           {images.map((item, index) => {
             const { img } = item;
@@ -41,7 +41,7 @@ function Featured(prop) {
                 initial={{ opacity: 0, x: 100 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, ease: easeInOut }}
-                className=" lg:aspect-[3/2] h-[400px] rounded-md snap-start snap-always relative overflow-hidden mt-[100px] lg:m-0 "
+                className="relative overflow-hidden lg:w-full h-[300px] lg:h-[400px] w-full rounded-md  "
               >
                 <Image
                   src={img}
@@ -54,7 +54,6 @@ function Featured(prop) {
             );
           })}
         </section>
-        <article className="crousel"></article>
       </section>
     </>
   );
