@@ -33,10 +33,14 @@ const TicketBar = () => {
             className="rounded-lg w-full"
           />
           <div className="dates flex gap-3">
-            <Datepicker className="w-full" />
-            {returnFlight && <Datepicker />}
+            <Datepicker className="w-full" minDate={new Date()} />
+            {returnFlight && (
+              <Datepicker className="w-full" minDate={new Date()} />
+            )}
           </div>
-          <button className="bg-special text-white w-full">Search</button>
+          <Link href="/pages/Contact">
+            <button className="bg-special text-white w-full">Search</button>
+          </Link>
         </section>
       </section>
     </>

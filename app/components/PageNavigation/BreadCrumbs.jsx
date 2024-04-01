@@ -6,7 +6,7 @@ export default function BreadCrumbs(props) {
 
   return (
     <Breadcrumb aria-label="Navigation" className="bg-white p-2 rounded-md">
-      <Breadcrumb.Item href="/Home" icon={HiHome}>
+      <Breadcrumb.Item href="/" icon={HiHome}>
         Home
       </Breadcrumb.Item>
 
