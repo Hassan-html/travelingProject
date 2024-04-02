@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import { connect } from "../../dbconfig/mongoseConfig";
 import User from "../../models/userModel";
 import jwt from "jsonwebtoken";
+import { sendEmail } from "../../helpers/mailer/nodeMailerTransport";
 
 // connecting mongo db
 connect();
@@ -10,9 +11,17 @@ connect();
 export async function POST(req) {
   const postData = await req.json();
   const { email, password } = postData;
-  console.log(email);
   const user = await User.findOne({ email: email });
-  if (user) {
+  const verified = user.isVerified || false;
+  if (user && !verified) {
+    const userId = user._id.valueOf();
+
+    const mail = await sendEmail(email, userId, "verify");
+    return NextResponse.json(
+      { message: "We sent you an Email. verify your email" },
+      { status: 505 }
+    );
+  } else if (user && verified) {
     // comparing password
 
     const validatePassword = await bcrypt.compare(password, user.password);
@@ -45,6 +54,9 @@ export async function POST(req) {
       return response;
     }
   } else {
-    return NextResponse.json({ message: "Invalid Email" }, { status: 505 });
+    return NextResponse.json(
+      { message: "Invalid credentials" },
+      { status: 505 }
+    );
   }
 }

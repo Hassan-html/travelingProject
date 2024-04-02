@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { connect } from "../../dbconfig/mongoseConfig";
 import User from "../../models/userModel";
 import { errors } from "@vinejs/vine";
+import { sendEmail } from "../../helpers/mailer/nodeMailerTransport";
 
 // connecting mongo db
 connect();
@@ -39,9 +40,13 @@ export async function POST(req) {
     });
 
     const savedUser = await newUser.save();
+    const userInfo = await User.findOne({ email: email });
+    const userId = userInfo._id.valueOf();
+
+    const mail = await sendEmail(email, userId, "verify");
 
     return NextResponse.json(
-      { message: "User created Successfully" },
+      { message: "We sent you an Email verify your email" },
       { status: 200 }
     );
   } catch (error) {

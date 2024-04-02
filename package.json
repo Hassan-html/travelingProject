@@ -32,7 +32,9 @@
     "sync-sql": "^1.0.2"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.6",
+    "@types/nodemailer": "^6.4.14",
     "@types/react": "18.2.73",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",

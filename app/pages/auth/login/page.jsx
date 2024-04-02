@@ -32,12 +32,6 @@ export default function Login() {
         toast.error(err.response.data.message);
         setUserLogged(true);
       });
-    if (err || success) {
-      setInterval(() => {
-        setErr();
-        setSuccess();
-      }, 3000);
-    }
   };
   return (
     <>

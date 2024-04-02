@@ -21,17 +21,18 @@ export default function Register() {
   const formHandler = (e) => {
     e.preventDefault();
     setUserCreated(false);
-    console.log(body);
 
     axios
       .post("/api/controllers/register", JSON.stringify(body))
       .then((res) => {
         console.log(res);
         setErr("");
-        setSuccess("User Registered");
-        toast.success("User Registered");
-        router.push("/pages/auth/login");
-        setUserCreated(true);
+        setSuccess(res.data.message);
+        toast.success(res.data.message);
+        setInterval(() => {
+          router.push("/pages/auth/login");
+          setUserCreated(true);
+        }, 5000);
       })
       .catch((err) => {
         const error = err.response.data.message;

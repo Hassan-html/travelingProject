@@ -8,7 +8,7 @@ const Loading = () => {
     <>
       <section className="h-screen flex justify-center flex-col items-center">
         <CircleLoader color="#05445E" />
-        <span className="text-4xl tracking-[10px]">skywave</span>
+        <span className="text-4xl tracking-[10px]">Travel Wavezs</span>
       </section>
     </>
   );
