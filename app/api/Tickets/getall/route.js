@@ -5,9 +5,12 @@ export const GET = async () => {
   try {
     const oneWayData = await executeQuery("SELECT * FROM OneWayTicket", []);
     const ReturnTicket = await executeQuery("SELECT * FROM ReturnTicket");
-    return NextResponse.json({
-      message: { oneWay: oneWayData, returnTicket: ReturnTicket },
-    });
+    return NextResponse.json(
+      {
+        message: { oneWay: oneWayData, returnTicket: ReturnTicket },
+      },
+      { status: 200 }
+    );
   } catch (error) {
     NextResponse.json({ message: "Server error please try refreshing page" });
   }

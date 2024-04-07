@@ -40,6 +40,7 @@ const page = () => {
       .then((res) => {
         setOneWay(res.data.message.oneWay);
         setReturnTicket(res.data.message.returnTicket);
+        console.log("something fetch");
       })
       .catch((err) => {
         console.log(err);
