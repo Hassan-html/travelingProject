@@ -85,7 +85,7 @@ const page = () => {
       setSingleTickets(UnMatched);
       setLoading(false);
     }
-  }, [oneway, returnTicket]);
+  });
   if (loading) {
     return <SpinnerPage />;
   } else {
