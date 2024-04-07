@@ -11,25 +11,6 @@ export async function GET(request: NextRequest) {
         { message: userId, logedIn: true },
         { status: 200 }
       );
-    }
-    // deleting cookie if someone mess with it
-    else if (userId === "NotFound") {
-      try {
-        const response = NextResponse.json(
-          { message: false, logedIn: false },
-          { status: 200 }
-        );
-        response.cookies.set("token", "", {
-          httpOnly: true,
-          sameSite: true,
-          secure: true,
-          expires: new Date(0),
-        });
-        return response;
-      } catch (error) {
-        console.log(error);
-        return NextResponse.json({ message: error }, { status: 505 });
-      }
     } else {
       return NextResponse.json(
         { message: "", logedIn: false },
