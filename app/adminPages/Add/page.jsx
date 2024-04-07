@@ -40,7 +40,47 @@ const page = () => {
       .then((res) => {
         setOneWay(res.data.message.oneWay);
         setReturnTicket(res.data.message.returnTicket);
-        console.log("something fetch");
+        if (oneway) {
+          let values = oneway.map((item) => {
+            return item.Airline;
+          });
+          values = new Set(values);
+          values = [...values];
+          setAirLine(values);
+          const Matched = oneway
+            .map((element1) => {
+              const matchingElement = returnTicket.find(
+                (element2) => element2.id === element1.id
+              );
+
+              if (matchingElement) {
+                return {
+                  oneway: element1,
+                  returnTicket: matchingElement,
+                };
+              } else {
+                return null;
+              }
+            })
+            .filter((element) => element !== null);
+          const UnMatched = oneway
+            .map((element1) => {
+              const matchingElement = returnTicket.find(
+                (element2) => element2.id === element1.id
+              );
+
+              if (matchingElement) {
+                return null;
+              } else {
+                return element1;
+              }
+            })
+            .filter((element) => element !== null);
+          setMultiTickets(Matched);
+          setSingleTickets(UnMatched);
+          setOneWay(false);
+          setLoading(false);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -84,6 +124,7 @@ const page = () => {
         .filter((element) => element !== null);
       setMultiTickets(Matched);
       setSingleTickets(UnMatched);
+      setOneWay(false);
       setLoading(false);
     }
   }, [oneway, returnTicket]);
