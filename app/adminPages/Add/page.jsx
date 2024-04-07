@@ -12,7 +12,7 @@ import Dashboard from "@/app/components/admincomponents/navigation/Dashboard";
 // some helpers
 
 const page = () => {
-  const [oneway, setOneWay] = useState();
+  const [oneway, setOneWay] = useState(false);
   const [returnTicket, setReturnTicket] = useState();
   const [MultiTickets, setMultiTickets] = useState();
   const [SingleTickets, setSingleTickets] = useState();
@@ -34,23 +34,18 @@ const page = () => {
   };
 
   useEffect(() => {
-    setInterval(() => {
+    if (!oneway) {
       axios
         .get("/api/Tickets/getall")
         .then((res) => {
           setOneWay(res.data.message.oneWay);
           setReturnTicket(res.data.message.returnTicket);
         })
-        .catch(
-          (err) => {
-            console.log(err);
-            toast.error("error here");
-            setLoading(false);
-          },
-          [oneway, returnTicket]
-        );
-    }, 10000);
-    if (oneway) {
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    } else if (oneway) {
       let values = oneway.map((item) => {
         return item.Airline;
       });
@@ -90,7 +85,8 @@ const page = () => {
       setSingleTickets(UnMatched);
       setLoading(false);
     }
-  });
+  }, [oneway, returnTicket]);
+
   if (loading) {
     return <SpinnerPage />;
   } else {
@@ -147,7 +143,7 @@ const page = () => {
                     return (
                       <>
                         <tr className="h-[40px] text-center">
-                          <td colspan="11">
+                          <td colSpan="11">
                             <span className="bg-Dark text-white p-2 px-4 rounded-lg">
                               {item}
                             </span>

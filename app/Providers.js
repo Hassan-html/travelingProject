@@ -13,7 +13,7 @@ export function useLogedProvider() {
 export const LogedProvider = ({ children }) => {
   const [user, setUser] = useState(false);
 
-  useEffect(() => {
+  const fetchUser = () => {
     axios
       .get("/api/controllers/user")
       .then((res) => {
@@ -23,7 +23,10 @@ export const LogedProvider = ({ children }) => {
         setUser({ userId: err, logedStatus: false });
         console.log(err);
       });
-  }, [user]);
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
   return (
     <logedInContext.Provider value={user}>
       {!user ? <SpinnerPage /> : children}

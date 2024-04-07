@@ -1,13 +1,27 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { FaArrowUp, FaComputer, FaUser } from "react-icons/fa6";
 import { RiShutDownLine } from "react-icons/ri";
 import { motion } from "framer-motion";
+import axios from "axios";
 const Dashboard = () => {
   const [nav, setNav] = useState(false);
   const [subMenu, setSubMenu] = useState(false);
+  const navigate = useRouter();
+  const logout = () => {
+    axios
+      .get("/api/controllers/logout")
+      .then((res) => {
+        console.log(res.data);
+        navigate.push("/pages/auth/login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -87,7 +101,7 @@ const Dashboard = () => {
             <FaUser />
             {nav && `Users`}
           </li>
-          <li className="p-4 bg-red-400 rounded-lg flex gap-2">
+          <li className="p-4 bg-red-400 rounded-lg flex gap-2" onClick={logout}>
             <RiShutDownLine className="text-lg" />
             {nav && `Logout`}
           </li>
