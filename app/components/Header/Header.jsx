@@ -39,7 +39,7 @@ export default function Header() {
         setUser({ userId: err, logedStatus: false });
         console.log(err);
       });
-  });
+  }, []);
 
   if (Loged === true) {
     return (

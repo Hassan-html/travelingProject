@@ -25,6 +25,7 @@ export default function Login() {
       .then((res) => {
         console.log(res);
         toast.success("Loged In");
+        window.location.reload();
         navigate.push("/pages/profile/helo");
       })
       .catch((err) => {

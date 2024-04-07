@@ -16,6 +16,8 @@ const Dashboard = () => {
       .get("/api/controllers/logout")
       .then((res) => {
         console.log(res.data);
+        window.location.reload();
+
         navigate.push("/pages/auth/login");
       })
       .catch((err) => {
