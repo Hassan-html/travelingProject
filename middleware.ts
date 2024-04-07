@@ -6,7 +6,10 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl.pathname;
   if ((url.includes("/login") || url.includes("/register")) && checkingCookie) {
     return NextResponse.rewrite(new URL("/", request.url));
-  } else if (url.includes("/profile") && !checkingCookie) {
+  } else if (
+    (url.includes("/profile") || url.includes("/adminPages")) &&
+    !checkingCookie
+  ) {
     return NextResponse.rewrite(new URL("/", request.url));
   }
 
