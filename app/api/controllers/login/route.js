@@ -43,7 +43,7 @@ export async function POST(req) {
         expiresIn: "1d",
       });
       const response = NextResponse.json(
-        { message: "Login successful" },
+        { message: "Login successful", Admin: user.isAdmin },
         { status: 200 }
       );
       response.cookies.set("token", token, {

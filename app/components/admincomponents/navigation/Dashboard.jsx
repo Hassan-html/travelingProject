@@ -1,14 +1,24 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { FaArrowUp, FaComputer, FaUser } from "react-icons/fa6";
+import {
+  FaArrowUp,
+  FaBars,
+  FaComputer,
+  FaPerson,
+  FaUser,
+} from "react-icons/fa6";
 import { RiShutDownLine } from "react-icons/ri";
 import { motion } from "framer-motion";
 import axios from "axios";
-const Dashboard = () => {
+const Dashboard = (prop) => {
+  const { user } = prop;
+
   const [nav, setNav] = useState(false);
+  const [userAccount, setUserAccount] = useState(false);
+  const [drop, setDrop] = useState(false);
   const [subMenu, setSubMenu] = useState(false);
   const navigate = useRouter();
   const logout = () => {
@@ -25,90 +35,187 @@ const Dashboard = () => {
       });
   };
 
+  useEffect(() => {
+    console.log(user);
+    if (!userAccount) {
+      axios
+        .post("/api/user", JSON.stringify(user))
+        .then((res) => {
+          setUserAccount(res.data.data);
+          console.log(res);
+          console.log(userAccount);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
   return (
     <>
-      <motion.nav
-        initial={nav ? { width: 90 } : { width: 300 }}
-        animate={nav ? { width: 300 } : { width: 90 }}
-        layout
-        className=" fixed left-[0px] h-screen w-[300px]  text-white  p-4 bg-purple-600 grid  grid-rows-[200px,1fr] z-[100]"
-      >
-        {/* nav head */}
-        <div
-          className="flex items-center gap-3 cursor-pointer"
-          onClick={() => {
-            setNav(!nav);
-            setSubMenu(false);
-          }}
-        >
-          <div className="relative h-[60px] w-[60px] rounded-full bg-white">
-            <Image src="/logo.svg" alt="logo" fill objectFit="contain" />
-          </div>
-          {nav && <p className="text-[20px] font-bold">Travel Wavezs</p>}
+      <nav className="bg-white p-[15px] lg:flex lg:justify-between relative lg:items-center lg:h-auto grid ">
+        <div className="bar flex justify-between items-center">
+          <h1 className="flex justify-center items-center gap-2">
+            <span className="relative w-[30px] h-[30px]">
+              <Image src="/logo.svg" fill objectFit="cover" alt="logo" />
+            </span>
+            Travel Wavezs
+          </h1>
+          <button
+            className="bars lg:hidden text-[25px]"
+            onClick={() => {
+              setNav(!nav);
+            }}
+          >
+            <FaBars />
+          </button>
         </div>
 
-        <ul className=" h-full text-[14px] flex flex-col gap-3">
-          {/*  navigation bar items */}
-          <li className="p-4 bg-purple-700 rounded-lg flex gap-2 items-center">
-            <FaComputer className="text-lg" />
-            {nav && `Dashboard `}
-          </li>
-          <motion.li
-            className="p-4  bg-purple-700 rounded-lg grid  overflow-hidden"
-            layout
+        {!userAccount.Admin && (
+          <ul
+            className={`links h-full lg:flex flex-col lg:flex-row gap-4 lg:items-center text-[17px] text-secondary mt-3 lg:mt-0  ${
+              !nav && "hidden"
+            }`}
           >
-            <div
-              className="drop-head flex justify-between items-center"
-              onClick={() => {
-                setSubMenu(!subMenu);
-              }}
-            >
-              {nav && `Tickets`}
-              <motion.div
-                initial={!subMenu ? { rotate: 180 } : { rotate: 0 }}
-                animate={subMenu ? { rotate: 180 } : { rotate: 0 }}
-                layout
+            <li className="hover:bg-Dark hover:text-white p-4 lg:rounded-lg">
+              <Link
+                href="/"
+                onClick={() => {
+                  setNav(false);
+                }}
               >
-                <FaArrowUp className="" />
-              </motion.div>
-            </div>
-            <motion.ul
-              initial={subMenu ? { height: 0 } : { height: "auto" }}
-              animate={subMenu ? { height: "auto" } : { height: 0 }}
-              className={`Droplink right-[-100px] pl-4 flex gap-2 flex-col   overflow-hidden w-full  ${
-                !nav &&
-                `absolute bg-purple-400 right-[-90px] text-white shadow-xl${
-                  !subMenu && "w-0"
-                }`
-              }`}
-              layout
-            >
-              <li>
-                <Link
-                  href="/adminPages/Add"
-                  onClick={() => {
-                    setNav(false);
-                    setSubMenu(false);
-                  }}
-                >
-                  Add
-                </Link>
-              </li>
-              <li>Pending</li>
-              <li>Approved</li>
-              <li>Reserved</li>
-            </motion.ul>
-          </motion.li>
-          <li className="p-4 bg-purple-700 rounded-lg flex gap-2">
-            <FaUser />
-            {nav && `Users`}
-          </li>
-          <li className="p-4 bg-red-400 rounded-lg flex gap-2" onClick={logout}>
-            <RiShutDownLine className="text-lg" />
-            {nav && `Logout`}
-          </li>
-        </ul>
-      </motion.nav>
+                Bookings
+              </Link>
+            </li>
+            <li className="hover:bg-Dark hover:text-white p-4 lg:rounded-lg">
+              <Link
+                href="/pages/Packages"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                Pending
+              </Link>
+            </li>
+            <li className="hover:bg-Dark hover:text-white p-4 lg:rounded-lg">
+              <Link
+                href="/pages/About"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                Booked
+              </Link>
+            </li>
+            <li className="hover:bg-Dark hover:text-white p-4 lg:rounded-lg">
+              <Link
+                href="/pages/Contact"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                My Ledger
+              </Link>
+            </li>
+            <li className="hover:bg-Dark hover:text-white p-4 lg:rounded-lg">
+              <Link
+                href="/pages/Contact"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                Bank Details
+              </Link>
+            </li>
+          </ul>
+        )}
+        {userAccount.Admin && (
+          <ul
+            className={`links h-full lg:flex flex-col lg:flex-row gap-4 lg:items-center text-[17px] text-secondary mt-3 lg:mt-0  ${
+              !nav && "hidden"
+            }`}
+          >
+            <li className="hover:bg-Dark hover:text-white p-4 lg:rounded-lg">
+              <Link
+                href="/adminPages/Home"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                Bookings
+              </Link>
+            </li>
+            <li className="hover:bg-Dark hover:text-white p-4 lg:rounded-lg">
+              <Link
+                href="/adminPages/Tickets/Pending"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                Pending
+              </Link>
+            </li>
+            <li className="hover:bg-Dark hover:text-white p-4 lg:rounded-lg">
+              <Link
+                href="/adminPages/Tickets/Booked"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                Booked
+              </Link>
+            </li>
+            <li className="hover:bg-Dark hover:text-white p-4 lg:rounded-lg">
+              <Link
+                href="/adminPages/Tickets/Record"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                Record
+              </Link>
+            </li>
+            <li className="hover:bg-Dark hover:text-white p-4 lg:rounded-lg">
+              <Link
+                href="/adminPages/Bank"
+                onClick={() => {
+                  setNav(false);
+                }}
+              >
+                Bank Details
+              </Link>
+            </li>
+          </ul>
+        )}
+        <button
+          className={`rounded-full relative lg:flex flex justify-center items-center bg-Dark p-4 justify-self-end ${
+            !nav && "hidden"
+          }`}
+          onClick={() => {
+            setDrop(!drop);
+          }}
+        >
+          <FaUser className="text-[24px] text-white " />
+        </button>
+        <div
+          className={`dropdown absolute bg-white p-4 rounded-lg right-[15px] bottom-[-160px] z-[2000] ${
+            drop ? "block" : "hidden"
+          }`}
+        >
+          <ul className="flex flex-col gap-4">
+            {!userAccount ? (
+              "Loading"
+            ) : (
+              <>
+                <li>{userAccount && userAccount.name}</li>
+                <li>{userAccount && userAccount.email}</li>
+                <button className="bg-red-500 text-white" onClick={logout}>
+                  Logout
+                </button>
+              </>
+            )}
+          </ul>
+        </div>
+      </nav>
     </>
   );
 };

@@ -6,36 +6,29 @@ export const POST = async (req) => {
   // inserting for one way ticket
   const { oneWay, returnTicket, price } = body;
 
-  // adding one way
-  const AddedOneWayTicket = await executeQuery(
-    "INSERT INTO OneWayTicket (id,Airline,FlightNo,Sector,DepartureDate,DepartureTime,ArrivalTime,Baggage,Meal,Booked,entery,price) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
-    [
-      null,
-      oneWay.airLine,
-      oneWay.flightNo,
-      oneWay.Sector,
-      oneWay.DepartureDate,
-      oneWay.DepartureTime,
-      oneWay.ArrivalTime,
-      oneWay.Baggage,
-      oneWay.Meal,
-      false,
-      null,
-      price,
-    ]
-  );
-  console.log(returnTicket);
-
-  // adding Return point
-  if (returnTicket.TicketType !== "") {
-    const gettingIdFromOneWay = await executeQuery(
-      "SELECT MAX(id) FROM OneWayTicket"
-    );
-    const latestOneWay = gettingIdFromOneWay[0]["MAX(id)"];
+  // adding Return
+  if (
+    returnTicket.airLine !== "" &&
+    returnTicket.flightNo !== "" &&
+    returnTicket.DepartureDate !== "" &&
+    returnTicket.DepartureTime !== "" &&
+    returnTicket.ArrivalTime !== "" &&
+    returnTicket.Baggage !== ""
+  ) {
     const AddedReturnTicket = await executeQuery(
-      "INSERT INTO ReturnTicket (id,Airline,FlightNo,Sector,DepartureDate,DepartureTime,ArrivalTime,Baggage,Meal,Booked,entery,price) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO ReturnTicket (Airline,FlightNo,Sector,DepartureDate,DepartureTime,ArrivalTime,Baggage,Meal,Booked,entery,price,rAirline,rFlightNo,rSector,rDepartureDate,rArrivalTime,rBaggage,rMeal,id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
-        latestOneWay,
+        oneWay.airLine,
+        oneWay.flightNo,
+        oneWay.Sector,
+        oneWay.DepartureDate,
+        oneWay.DepartureTime,
+        oneWay.ArrivalTime,
+        oneWay.Baggage,
+        oneWay.Meal,
+        false,
+        null,
+        price,
         returnTicket.airLine,
         returnTicket.flightNo,
         returnTicket.Sector,
@@ -44,16 +37,35 @@ export const POST = async (req) => {
         returnTicket.ArrivalTime,
         returnTicket.Baggage,
         returnTicket.Meal,
+        null,
+      ]
+    );
+    console.log(AddedReturnTicket);
+    return NextResponse.json(
+      { message: "Return Ticket Added" },
+      { status: 200 }
+    );
+  } else {
+    const AddedOneWayTicket = await executeQuery(
+      "INSERT INTO OneWayTicket (id,Airline,FlightNo,Sector,DepartureDate,DepartureTime,ArrivalTime,Baggage,Meal,Booked,entery,price) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+      [
+        null,
+        oneWay.airLine,
+        oneWay.flightNo,
+        oneWay.Sector,
+        oneWay.DepartureDate,
+        oneWay.DepartureTime,
+        oneWay.ArrivalTime,
+        oneWay.Baggage,
+        oneWay.Meal,
         false,
         null,
         price,
       ]
     );
-    console.log(AddedReturnTicket);
+    console.log(AddedOneWayTicket);
+    return NextResponse.json({ message: "Ticket Added" }, { status: 200 });
   }
 
-  console.log(AddedOneWayTicket);
-  console.log(body);
-
-  return NextResponse.json({ message: "Ticket Added" }, { status: 200 });
+  return NextResponse.json({ message: "some Error" }, { status: 200 });
 };

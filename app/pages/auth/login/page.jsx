@@ -26,7 +26,11 @@ export default function Login() {
         console.log(res);
         toast.success("Loged In");
         window.location.reload();
-        navigate.push("/pages/profile/helo");
+        if (res.data.Admin) {
+          navigate.push("/adminPages/Home");
+        } else {
+          navigate.push("/pages/profile/helo");
+        }
       })
       .catch((err) => {
         setErr(err.response.data.message);

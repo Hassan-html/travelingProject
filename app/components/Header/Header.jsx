@@ -45,7 +45,7 @@ export default function Header() {
     return (
       <>
         {" "}
-        <Dashboard />
+        <Dashboard user={user} />
       </>
     );
   } else {
