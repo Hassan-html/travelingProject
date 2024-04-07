@@ -127,6 +127,7 @@ const page = () => {
       setOneWay(false);
       setLoading(false);
     }
+    console.log(MultiTickets, SingleTickets);
   }, [oneway, returnTicket]);
 
   if (loading) {
