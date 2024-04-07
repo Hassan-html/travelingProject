@@ -26,6 +26,7 @@ const page = () => {
       .then((res) => {
         console.log(res.data.message);
         toast.success("Ticket Deleted Successfully");
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -34,18 +35,17 @@ const page = () => {
   };
 
   useEffect(() => {
-    if (!oneway) {
-      axios
-        .get("/api/Tickets/getall")
-        .then((res) => {
-          setOneWay(res.data.message.oneWay);
-          setReturnTicket(res.data.message.returnTicket);
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoading(false);
-        });
-    } else if (oneway) {
+    axios
+      .get("/api/Tickets/getall")
+      .then((res) => {
+        setOneWay(res.data.message.oneWay);
+        setReturnTicket(res.data.message.returnTicket);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+    if (oneway) {
       let values = oneway.map((item) => {
         return item.Airline;
       });
