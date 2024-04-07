@@ -40,11 +40,14 @@ const page = () => {
         setOneWay(res.data.message.oneWay);
         setReturnTicket(res.data.message.returnTicket);
       })
-      .catch((err) => {
-        console.log(err);
-        toast.error("error here");
-        setLoading(false);
-      });
+      .catch(
+        (err) => {
+          console.log(err);
+          toast.error("error here");
+          setLoading(false);
+        },
+        [oneway, returnTicket]
+      );
     if (oneway) {
       let values = oneway.map((item) => {
         return item.Airline;
