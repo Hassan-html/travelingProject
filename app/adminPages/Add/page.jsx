@@ -34,20 +34,22 @@ const page = () => {
   };
 
   useEffect(() => {
-    axios
-      .get("/api/Tickets/getall")
-      .then((res) => {
-        setOneWay(res.data.message.oneWay);
-        setReturnTicket(res.data.message.returnTicket);
-      })
-      .catch(
-        (err) => {
-          console.log(err);
-          toast.error("error here");
-          setLoading(false);
-        },
-        [oneway, returnTicket]
-      );
+    setInterval(() => {
+      axios
+        .get("/api/Tickets/getall")
+        .then((res) => {
+          setOneWay(res.data.message.oneWay);
+          setReturnTicket(res.data.message.returnTicket);
+        })
+        .catch(
+          (err) => {
+            console.log(err);
+            toast.error("error here");
+            setLoading(false);
+          },
+          [oneway, returnTicket]
+        );
+    }, 100000);
     if (oneway) {
       let values = oneway.map((item) => {
         return item.Airline;
