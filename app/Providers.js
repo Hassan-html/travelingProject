@@ -23,7 +23,7 @@ export const LogedProvider = ({ children }) => {
         setUser({ userId: err, logedStatus: false });
         console.log(err);
       });
-  }, []);
+  }, [user]);
   return (
     <logedInContext.Provider value={user}>
       {!user ? <SpinnerPage /> : children}

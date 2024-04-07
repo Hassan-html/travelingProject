@@ -49,7 +49,7 @@ const page = () => {
           },
           [oneway, returnTicket]
         );
-    }, 100000);
+    }, 10000);
     if (oneway) {
       let values = oneway.map((item) => {
         return item.Airline;
