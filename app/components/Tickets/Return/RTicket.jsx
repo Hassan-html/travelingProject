@@ -10,7 +10,7 @@ const RTicket = () => {
   useEffect(() => {
     if (!rTicket) {
       axios
-        .get("/api/Tickets/getReturn")
+        .post("/api/Tickets/getReturn", JSON.stringify({}))
         .then((res) => {
           setRTicket(res.data.message);
           console.log(rTicket);

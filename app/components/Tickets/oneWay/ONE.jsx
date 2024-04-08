@@ -9,7 +9,7 @@ const ONE = () => {
   useEffect(() => {
     if (!oneWay) {
       axios
-        .post("/api/Tickets/getFromMongo", JSON.stringify({}))
+        .post("/api/Tickets/getOneWay", JSON.stringify({}))
         .then((res) => {
           setOneWay(res.data.message);
           console.log(oneWay);
@@ -22,13 +22,11 @@ const ONE = () => {
     if (oneWay) {
       setLoading(true);
       let heads = oneWay.map((item) => {
-        return item.Airline;
+        return { Airline: item.Airline, Sector: item.Sector };
       });
       heads = new Set(heads);
-
       heads = [...heads];
       setHeaders(heads);
-      console.log("this u ned: " + heads);
       setLoading(false);
     }
   }, [oneWay]);
@@ -56,7 +54,7 @@ const ONE = () => {
                   <>
                     <tr key={index} className="TicketTitle">
                       <td colSpan="11" className="Titles">
-                        {item}
+                        {item.Airline} || {item.Sector}
                       </td>
                     </tr>
                     {oneWay.map((innerItem) => {
@@ -73,7 +71,7 @@ const ONE = () => {
                         price,
                         id,
                       } = innerItem;
-                      if (Airline === item) {
+                      if (Airline === item.Airline && Sector === item.Sector) {
                         return (
                           <tr>
                             <td>

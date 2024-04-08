@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { executeQuery } from "../../connections/sqlConnection";
 
-export const GET = async () => {
+export const POST = async (req) => {
+  const body = await req.json();
   try {
     const ReturnData = await executeQuery("SELECT * FROM ReturnTicket", []);
 
