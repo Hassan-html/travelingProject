@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import "./style.css";
 import Link from "next/link";
+import ONE from "@/app/components/Tickets/oneWay/ONE";
+import RTicket from "@/app/components/Tickets/Return/RTicket";
 import {
   FaPlaneArrival,
   FaPlaneDeparture,
@@ -90,138 +92,12 @@ const pages = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="TicketTitle">
-                <td colSpan="11" className="Titles">
-                  SERENE AIRLINE || PHJ-JDG
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <FaPlaneDeparture className="absolute left-[5px]" />
-                  Serene
-                </td>
-                <td>ER 786</td>
-                <td>PHJ-SHJr</td>
-                <td>24-12-2024</td>
-                <td>1:00-2:00</td>
-                <td>20+07 kg</td>
-                <td>Yes</td>
-                <td>No</td>
-                <td>11000</td>
-                <td>
-                  <button className="underline text-red-700">Del</button> /{" "}
-                  <button className="underline text-special">Edit</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <FaPlaneDeparture className="absolute left-[5px]" /> Serene
-                </td>
-                <td>ER 786</td>
-                <td>PHJ-SHJr</td>
-                <td>24-12-2024</td>
-                <td>1:00-2:00</td>
-                <td>20+07 kg</td>
-                <td>Yes</td>
-                <td>No</td>
-                <td>11000</td>
-                <td>
-                  <button className="underline text-red-700">Del</button> /{" "}
-                  <button className="underline text-special">Edit</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <FaPlaneDeparture className="absolute left-[5px]" /> Serene
-                </td>
-                <td>ER 786</td>
-                <td>PHJ-SHJr</td>
-                <td>24-12-2024</td>
-                <td>1:00-2:00</td>
-                <td>20+07 kg</td>
-                <td>Yes</td>
-                <td>No</td>
-                <td>11000</td>
-                <td>
-                  <button className="underline text-red-700">Del</button> /{" "}
-                  <button className="underline text-special">Edit</button>
-                </td>
-              </tr>
-              <tr className="TicketTitle">
-                <td colSpan="11" className="Titles">
-                  SERENE AIRLINE || PHJ-JDG
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <FaPlaneDeparture className="absolute left-[5px]" /> Serene
-                </td>
-                <td> ER 786</td>
-                <td>PHJ-SHJr</td>
-                <td>24-12-2024</td>
-                <td>1:00-2:00</td>
-                <td>20+07 kg</td>
-                <td>Yes</td>
-                <td>No</td>
-                <td>11000</td>
-                <td>
-                  <button className="underline text-red-700">Del</button> /{" "}
-                  <button className="underline text-special">Edit</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <FaPlaneDeparture className="absolute left-[5px]" /> Serene
-                </td>
-                <td> ER 786</td>
-                <td>PHJ-SHJr</td>
-                <td>24-12-2024</td>
-                <td>1:00-2:00</td>
-                <td>20+07 kg</td>
-                <td>Yes</td>
-                <td>No</td>
-                <td>11000</td>
-                <td>
-                  <button className="underline text-red-700">Del</button> /{" "}
-                  <button className="underline text-special">Edit</button>
-                </td>
-              </tr>
+              {/* one way ticket */}
 
-              <tr className="TicketTitle">
-                <td colSpan="11" className="Titles">
-                  SERENE AIRLINE || PHJ-JDG
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <FaPlaneDeparture className="absolute left-[5px]" /> Serene
-                </td>
-                <td>ER 786</td>
-                <td>PHJ-SHJr</td>
-                <td>24-12-2024</td>
-                <td>1:00-2:00</td>
-                <td>20+07 kg</td>
-                <td>Yes</td>
-                <td>No</td>
-                <td rowSpan={2}>11000</td>
-                <td rowSpan={2}>
-                  <button className="underline text-red-700">Del</button> /{" "}
-                  <button className="underline text-special">Edit</button>
-                </td>
-              </tr>
-              <tr className="returnTicket">
-                <td>
-                  <FaPlaneArrival className="absolute left-[5px]" />
-                  Serene
-                </td>
-                <td>ER 786</td>
-                <td>PHJ-SHJr</td>
-                <td>24-12-2024</td>
-                <td>1:00-2:00</td>
-                <td>20+07 kg</td>
-                <td>Yes</td>
-                <td>No</td>
-              </tr>
+              <ONE />
+
+              {/* Return Tickets */}
+              <RTicket />
             </tbody>
           </table>
         </section>

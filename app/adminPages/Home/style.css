@@ -1,6 +1,6 @@
 td {
   text-align: center;
-  min-width: 70px;
+  min-width: 130px;
   position: relative;
 }
 table {
@@ -18,7 +18,7 @@ td.Titles {
   padding: 60px;
   font-size: 30px;
 }
-.returnTicket td {
+.returnT td {
   background-color: transparent;
 }
 .filterNav {
