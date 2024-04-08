@@ -1,11 +1,29 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { FaPlaneDeparture } from "react-icons/fa6";
+import toast from "react-hot-toast";
 import axios from "axios";
 const ONE = () => {
   const [oneWay, setOneWay] = useState();
   const [loading, setLoading] = useState(true);
   const [headers, setHeaders] = useState(false);
+  const deleteTicket = (e) => {
+    axios
+      .post(
+        "/api/Tickets/delete",
+        JSON.stringify({ id: e.target.value, type: "oneWay" })
+      )
+      .then((res) => {
+        toast.success(res.data.message);
+        if (res) {
+          setOneWay(false);
+          setHeaders(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     if (!oneWay) {
       axios
@@ -90,11 +108,15 @@ const ONE = () => {
                             <td>{Booked ? "Yes" : "No"}</td>
                             <td>{price}</td>
                             <td>
-                              <button className="underline text-red-700">
+                              <button
+                                className="underline text-red-700"
+                                value={id}
+                                onClick={deleteTicket}
+                              >
                                 Del
                               </button>{" "}
                               /{" "}
-                              <button className="underline text-special">
+                              <button className="underline text-special ">
                                 Edit
                               </button>
                             </td>

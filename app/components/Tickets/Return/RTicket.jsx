@@ -2,11 +2,31 @@
 import React, { useEffect, useState } from "react";
 import { FaPlaneDeparture, FaPlaneArrival } from "react-icons/fa6";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const RTicket = () => {
   const [rTicket, setRTicket] = useState();
   const [loading, setLoading] = useState(true);
   const [headers, setHeaders] = useState(false);
+  const deleteTicket = (e) => {
+    console.log("clicked");
+    axios
+      .post(
+        "/api/Tickets/delete",
+        JSON.stringify({ id: e.target.value, type: "return" })
+      )
+      .then((res) => {
+        toast.success(res.data.message);
+        if (res) {
+          setRTicket(false);
+          setHeaders(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     if (!rTicket) {
       axios
@@ -88,7 +108,11 @@ const RTicket = () => {
                               <td>{Booked ? "Yes" : "No"}</td>
                               <td>{price}</td>
                               <td>
-                                <button className="underline text-red-700">
+                                <button
+                                  className="underline text-red-700"
+                                  value={id}
+                                  onClick={deleteTicket}
+                                >
                                   Del
                                 </button>{" "}
                                 /{" "}
