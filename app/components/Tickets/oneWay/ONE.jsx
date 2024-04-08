@@ -7,6 +7,10 @@ const ONE = () => {
   const [loading, setLoading] = useState(true);
   const [headers, setHeaders] = useState(false);
   useEffect(() => {
+    window.addEventListener("DOMContentLoaded", () => {
+      setOneWay(false);
+      setLoading(true);
+    });
     if (!oneWay) {
       axios
         .get("/api/Tickets/getOneWay")
@@ -29,7 +33,7 @@ const ONE = () => {
       setHeaders(heads);
       setLoading(false);
     }
-  }, [oneWay]);
+  });
   return (
     <>
       {loading ? (
