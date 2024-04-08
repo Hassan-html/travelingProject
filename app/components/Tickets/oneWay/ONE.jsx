@@ -22,18 +22,13 @@ const ONE = () => {
     if (oneWay) {
       setLoading(true);
       let heads = oneWay.map((item) => {
-        return { Airline: item.Airline, Sector: item.Sector };
+        return item.Airline;
       });
-      let unique = new Set();
+      heads = new Set(heads);
 
-      const result = heads.filter((obj) => {
-        if (!unique.has(obj.name)) {
-          unique.add(obj.name);
-          return true;
-        }
-        return false;
-      });
-      setHeaders(result);
+      heads = [...heads];
+      setHeaders(heads);
+      console.log("this u ned: " + heads);
       setLoading(false);
     }
   }, [oneWay]);
@@ -61,7 +56,7 @@ const ONE = () => {
                   <>
                     <tr key={index} className="TicketTitle">
                       <td colSpan="11" className="Titles">
-                        {item.Airline} || {item.Sector}
+                        {item}
                       </td>
                     </tr>
                     {oneWay.map((innerItem) => {
@@ -78,7 +73,7 @@ const ONE = () => {
                         price,
                         id,
                       } = innerItem;
-                      if (Airline === item.Airline && Sector === item.Sector) {
+                      if (Airline === item) {
                         return (
                           <tr>
                             <td>
