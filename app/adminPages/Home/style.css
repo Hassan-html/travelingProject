@@ -32,4 +32,5 @@ td.Titles {
 .close {
   width: 0 !important;
   padding: 0px;
+  min-width: 0px !important;
 }

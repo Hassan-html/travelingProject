@@ -41,7 +41,9 @@ const pages = () => {
           {/* filter Nav */}
 
           <section
-            className={`${!filterNav && "close"} filterNav h-full w-[400px]`}
+            className={`${
+              !filterNav && "close"
+            } filterNav h-full min-w-[400px]`}
           >
             <div className="searchBox pb-[80px]">
               <div className="box flex">
