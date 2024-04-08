@@ -66,6 +66,4 @@ export const POST = async (req) => {
     console.log(AddedOneWayTicket);
     return NextResponse.json({ message: "Ticket Added" }, { status: 200 });
   }
-
-  return NextResponse.json({ message: "some Error" }, { status: 200 });
 };

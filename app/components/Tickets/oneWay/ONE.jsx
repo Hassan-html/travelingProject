@@ -7,13 +7,9 @@ const ONE = () => {
   const [loading, setLoading] = useState(true);
   const [headers, setHeaders] = useState(false);
   useEffect(() => {
-    window.addEventListener("DOMContentLoaded", () => {
-      setOneWay(false);
-      setLoading(true);
-    });
     if (!oneWay) {
       axios
-        .get("/api/Tickets/getOneWay")
+        .get("/api/Tickets/getFromMongo")
         .then((res) => {
           setOneWay(res.data.message);
           console.log(oneWay);
@@ -28,12 +24,19 @@ const ONE = () => {
       let heads = oneWay.map((item) => {
         return { Airline: item.Airline, Sector: item.Sector };
       });
-      heads = new Set(heads);
-      heads = [...heads];
-      setHeaders(heads);
+      let unique = new Set();
+
+      const result = heads.filter((obj) => {
+        if (!unique.has(obj.name)) {
+          unique.add(obj.name);
+          return true;
+        }
+        return false;
+      });
+      setHeaders(result);
       setLoading(false);
     }
-  });
+  }, [oneWay]);
   return (
     <>
       {loading ? (

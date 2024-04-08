@@ -32,9 +32,10 @@ const page = () => {
   const handelSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+
     axios
       .post(
-        "/api/adminapis/addTicket",
+        "/api/adminapis/addOnMongo",
         JSON.stringify({
           oneWay: oneWay,
           returnTicket: returnTicket,
