@@ -22,7 +22,7 @@ const ONE = () => {
     if (oneWay) {
       setLoading(true);
       let heads = oneWay.map((item) => {
-        return { Airline: item.Airline, Sector: item.Sector };
+        return item.Airline;
       });
       heads = new Set(heads);
       heads = [...heads];
@@ -54,7 +54,7 @@ const ONE = () => {
                   <>
                     <tr key={index} className="TicketTitle">
                       <td colSpan="11" className="Titles">
-                        {item.Airline} || {item.Sector}
+                        {item}
                       </td>
                     </tr>
                     {oneWay.map((innerItem) => {
@@ -71,7 +71,7 @@ const ONE = () => {
                         price,
                         id,
                       } = innerItem;
-                      if (Airline === item.Airline && Sector === item.Sector) {
+                      if (Airline === item) {
                         return (
                           <tr>
                             <td>

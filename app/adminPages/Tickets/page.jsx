@@ -35,7 +35,7 @@ const page = () => {
 
     axios
       .post(
-        "/api/adminapis/addOnMongo",
+        "/api/adminapis/addTicket",
         JSON.stringify({
           oneWay: oneWay,
           returnTicket: returnTicket,

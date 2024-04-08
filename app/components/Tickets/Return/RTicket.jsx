@@ -23,13 +23,12 @@ const RTicket = () => {
     if (rTicket) {
       setLoading(true);
       let heads = rTicket.map((item) => {
-        return { Airline: item.Airline, Sector: item.Sector };
+        return item.Airline;
       });
       heads = new Set(heads);
       heads = [...heads];
       setHeaders(heads);
       setLoading(false);
-      console.log(rTicket);
     }
   }, [rTicket]);
 
@@ -44,7 +43,7 @@ const RTicket = () => {
                   <>
                     <tr key={index} className="TicketTitle">
                       <td colSpan="11" className="Titles">
-                        {item.Airline} || {item.Sector}
+                        {item}
                       </td>
                     </tr>
                     {rTicket.map((innerItem) => {
@@ -69,7 +68,7 @@ const RTicket = () => {
                         rMeal,
                         rSector,
                       } = innerItem;
-                      if (Airline === item.Airline && Sector === item.Sector) {
+                      if (Airline === item) {
                         return (
                           <>
                             <tr key={id}>
