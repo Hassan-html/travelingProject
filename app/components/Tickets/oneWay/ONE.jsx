@@ -9,7 +9,7 @@ const ONE = () => {
   useEffect(() => {
     if (!oneWay) {
       axios
-        .get("/api/Tickets/getFromMongo")
+        .post("/api/Tickets/getFromMongo", JSON.stringify({}))
         .then((res) => {
           setOneWay(res.data.message);
           console.log(oneWay);

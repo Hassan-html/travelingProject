@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import oneWayTicketModel from "../../models/oneWayTicketModel";
-export const GET = async () => {
+export const POST = async () => {
   try {
     const oneWayData = await oneWayTicketModel.find({});
     console.log(oneWayData);
