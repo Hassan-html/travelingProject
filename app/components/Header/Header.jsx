@@ -29,6 +29,9 @@ export default function Header() {
     window.addEventListener("scroll", () => {
       setScroll(scrollY);
     });
+    window.addEventListener("DOMContentLoaded", () => {
+      setLoged(false);
+    });
     axios
       .get("/api/controllers/logeState")
       .then((res) => {
@@ -37,9 +40,9 @@ export default function Header() {
       })
       .catch((err) => {
         setUser({ userId: err, logedStatus: false });
-        console.log(err);
       });
-  }, []);
+    console.log(user);
+  }, [Loged]);
 
   if (Loged === true) {
     return (

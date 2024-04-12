@@ -36,6 +36,7 @@ export async function POST(req) {
         email: user.email,
         id: user._id,
         username: user.username,
+        isAdmin: user.isAdmin,
         time: new Date().getTime() + 3600 * 24,
       };
       // create token
@@ -50,6 +51,7 @@ export async function POST(req) {
         httpOnly: true,
         sameSite: true,
         secure: true,
+        expires: new Date().getTime() + 86400000,
       });
       return response;
     }
