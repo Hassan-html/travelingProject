@@ -1,0 +1,6 @@
+---
+deployments:
+  - deployment: traveling
+    branch: main
+    script: npm run build
+    target_dir: public_html

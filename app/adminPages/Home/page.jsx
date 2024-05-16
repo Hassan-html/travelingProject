@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import Link from "next/link";
 import ONE from "@/app/components/Tickets/oneWay/ONE";
@@ -11,7 +11,16 @@ import {
 } from "react-icons/fa6";
 import { HiSearch } from "react-icons/hi";
 const pages = () => {
+  const [user, setUser] = useState();
   const [filterNav, setFilterNav] = useState(false);
+  const getuser = async () => {
+    fetch("/api/user")
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    getuser();
+  }, []);
   return (
     <>
       <section>
