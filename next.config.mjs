@@ -1,10 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  compilerOptions: {
-    paths: {
-      "@/*": ["./*"],
-    },
-  },
-};
+const nextConfig = {};
 
 export default nextConfig;
