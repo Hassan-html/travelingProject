@@ -34,7 +34,7 @@ app.prepare().then(() => {
       console.error(err);
       process.exit(1);
     })
-    .listen(port, () => {
+    .listen(process.env.PORT, () => {
       console.log(`> Ready on http://${hostname}:${port}`);
     });
 });
